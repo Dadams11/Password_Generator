@@ -1,11 +1,17 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-
-
-//---- Let me start by saying this code is totally optional and if you want to go in a completely different direction I support it. Go with your gut and what works for you because it will help you figure out your thought process.Let us know if you have any questions and don't be afraid to start a dialogue with fellow students!  ----------------------- Delete this before you push your code to github LOL 
-
-
+// create arrays here in the global scope, from strings that you split using the .split() method
+var specialCharactersArray = '!@$%^&*()/+-'.split('') // split by character and return an array of special characters
+//console.log('specialCharactersArray', specialCharactersArray);
+// do the same thing for lowercase letters, uppercase letters, and numbers
+var lowercaseCharactersArray = 'abcdefghijklmnopqrstuvwxyz'.split('');
+var uppercaseCharactersArray = 'ABCDEFGHIJKLMONPQRSTUVWXYZ'.split('');
+var numbers = '1234567890' .split('')
+// create an array (empty) which will hold all the possible characters from which to make your password
+var masterArray = [];
+// create an empty string to hold your generated password
+var randomPassword = ""
 
 
 function getPasswordOptions() {
@@ -29,14 +35,21 @@ function getPasswordOptions() {
   var hasSpecialCharacters = confirm(
     'Click OK to confirm including special characters.'
   );
+  // you need to include some more confirm statements for lowercase, uppercase, and numbers
+  // put that here
+  var wantsUppercase = confirm("Want uppercase characters?");
+  // var wantsLowercase = ...
 
-   // Object to store user input
-   var passwordOptions = {
-    length: length,
-    // add more properties and values here
-   }
+  // Object to store user input
+  var passwordOptions = {
+    length,
+    hasSpecialCharacters,
+    wantsUppercase
+    // continue with the other variable names here
 
-   return passwordOptions;
+  }
+
+  return passwordOptions;
 }
 
 
@@ -53,30 +66,44 @@ function getRandom(arr) {
 function generatePassword() {
 
   var options = getPasswordOptions();
+
   // Variable to store password as it's being concatenated
-  var result = [];
+  //var result = [];
 
   // Array to store types of characters to include in password
-  var possibleCharacters = [];
+  //var possibleCharacters = [];
 
   // Array to contain one of each type of chosen character to ensure each will be used
-  var guaranteedCharacters = [];
+  //var guaranteedCharacters = [];
 
   // Check if an options object exists, if not exit the function
   if (!options) return null;
 
-   // Conditional statement that adds array of special characters into array of possible characters based on user input
+  // Conditional statement that adds array of special characters into array of possible characters based on user input
   // Push new random special character to guaranteedCharacters
   if (options.hasSpecialCharacters) {
-    possibleCharacters = possibleCharacters.concat(specialCharacters);
-    guaranteedCharacters.push(getRandom(specialCharacters));
+    masterArray = masterArray.concat(specialCharactersArray);
+    //possibleCharacters = possibleCharacters.concat(specialCharacters);
+    //guaranteedCharacters.push(getRandom(specialCharacters));
   }
 
-  
+  // do the same thing for uppercase letters
+  if (options.wantsUppercase) {
+    masterArray = masterArray.concat(uppercaseCharactersArray)
+  }
+if (options.wantsLowercase){
+  masterArray = masterArray.concat(lowercaseCharactersArray)
 
+}
+  // now that you have your master array with all the characters possible
+  // randomly select a character from it, for as many times as you need to reach the length desired by the user
+  for(var i = 0; i < options.length; i++) {
+    var randomChar = getRandom(masterArray);
+    randomPassword = randomPassword.concat(randomChar);
+  }
 
-    // Transform the result into a string and pass into writePassword
-    return result.join('');
+  // Transform the result into a string and pass into writePassword
+  return randomPassword;
 }
 
 // Write password to the #password input
@@ -85,7 +112,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
