@@ -2,16 +2,16 @@
 var generateBtn = document.querySelector("#generate");
 
 // create arrays here in the global scope, from strings that you split using the .split() method
-var specialCharactersArray = '!@$%^&*()/+-'.split('') // split by character and return an array of special characters
+var specialCharactersArray = '!@$%^&*()/+-'.split(''); // split by character and return an array of special characters
 //console.log('specialCharactersArray', specialCharactersArray);
 // do the same thing for lowercase letters, uppercase letters, and numbers
 var lowercaseCharactersArray = 'abcdefghijklmnopqrstuvwxyz'.split('');
 var uppercaseCharactersArray = 'ABCDEFGHIJKLMONPQRSTUVWXYZ'.split('');
-var numbers = '1234567890' .split('')
+var numbersArray = '1234567890' .split('');
 // create an array (empty) which will hold all the possible characters from which to make your password
 var masterArray = [];
 // create an empty string to hold your generated password
-var randomPassword = ""
+var randomPassword = ''
 
 
 function getPasswordOptions() {
@@ -38,13 +38,17 @@ function getPasswordOptions() {
   // you need to include some more confirm statements for lowercase, uppercase, and numbers
   // put that here
   var wantsUppercase = confirm("Want uppercase characters?");
-  // var wantsLowercase = ...
+  var wantsLowercase = confirm ("Want lowercase characters?");
+  var wantsNumbers = confirm("Want numbers?");
+  
 
   // Object to store user input
   var passwordOptions = {
     length,
     hasSpecialCharacters,
-    wantsUppercase
+    wantsUppercase,
+    wantsLowercase,
+    wantsNumbers,
     // continue with the other variable names here
 
   }
@@ -83,23 +87,23 @@ function generatePassword() {
   // Push new random special character to guaranteedCharacters
   if (options.hasSpecialCharacters) {
     masterArray = masterArray.concat(specialCharactersArray);
-    //possibleCharacters = possibleCharacters.concat(specialCharacters);
-    //guaranteedCharacters.push(getRandom(specialCharacters));
   }
 
   // do the same thing for uppercase letters
   if (options.wantsUppercase) {
-    masterArray = masterArray.concat(uppercaseCharactersArray)
+    masterArray = masterArray.concat(uppercaseCharactersArray);
   }
 if (options.wantsLowercase){
-  masterArray = masterArray.concat(lowercaseCharactersArray)
-
+  masterArray = masterArray.concat(lowercaseCharactersArray);
+}
+if (options.wantsNumbers){
+masterArray= masterArray.concat(numbersArray);
 }
   // now that you have your master array with all the characters possible
   // randomly select a character from it, for as many times as you need to reach the length desired by the user
-  for(var i = 0; i < options.length; i++) {
+  for (var i = 0; i < options.length; i++) {
     var randomChar = getRandom(masterArray);
-    randomPassword = randomPassword.concat(randomChar);
+   randomPassword = randomPassword.concat(randomChar);
   }
 
   // Transform the result into a string and pass into writePassword
