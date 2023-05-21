@@ -18,16 +18,12 @@ function getPasswordOptions() {
 
   // Variable to store length of password from user input
   var length = parseInt(
-    prompt('How many characters would you like your password to contain?'),
-    10
+    prompt('How many characters would you like your password to contain? (8 - 128 characters)'), 
   );
 
-  // YOU WILL NEED MORE CODE IN HERE!~!!!!!!!!-----------------------------------
-
-
   // Conditional statement to check if password length is a number. Prompts end if this evaluates false
-  if (Number.isNaN(length)) {
-    alert('Password length must be provided as a number');
+  if (Number.isNaN(length) || length < 8 || length > 128) {
+    alert('Password length must be provided as a number, between 8-128 characters, please try again')
     return null;
   }
 
@@ -35,8 +31,7 @@ function getPasswordOptions() {
   var hasSpecialCharacters = confirm(
     'Click OK to confirm including special characters.'
   );
-  // you need to include some more confirm statements for lowercase, uppercase, and numbers
-  // put that here
+  // needed to include some more confirm statements for lowercase, uppercase, and numbers
   var wantsUppercase = confirm("Want uppercase characters?");
   var wantsLowercase = confirm ("Want lowercase characters?");
   var wantsNumbers = confirm("Want numbers?");
@@ -49,7 +44,7 @@ function getPasswordOptions() {
     wantsUppercase,
     wantsLowercase,
     wantsNumbers,
-    // continue with the other variable names here
+   
 
   }
 
@@ -71,16 +66,7 @@ function generatePassword() {
 
   var options = getPasswordOptions();
 
-  // Variable to store password as it's being concatenated
-  //var result = [];
-
-  // Array to store types of characters to include in password
-  //var possibleCharacters = [];
-
-  // Array to contain one of each type of chosen character to ensure each will be used
-  //var guaranteedCharacters = [];
-
-  // Check if an options object exists, if not exit the function
+  
   if (!options) return null;
 
   // Conditional statement that adds array of special characters into array of possible characters based on user input
@@ -89,7 +75,6 @@ function generatePassword() {
     masterArray = masterArray.concat(specialCharactersArray);
   }
 
-  // do the same thing for uppercase letters
   if (options.wantsUppercase) {
     masterArray = masterArray.concat(uppercaseCharactersArray);
   }
