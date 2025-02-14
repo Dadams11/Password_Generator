@@ -1,12 +1,41 @@
 # Password Generator
 
-HTML, CSS and Javascript documents are used to create a random password generator.
+## Description
+This is a simple password generator application that allows users to create secure passwords based on specified criteria. Users can choose the length of the password and include lowercase, uppercase, numbers, and special characters.
 
-Main focus on this project is to use Javascript to create a user prompt.
+## Features
+- Generates passwords between 8 and 128 characters long.
+- Users can choose character types to include:
+  - Lowercase letters
+  - Uppercase letters
+  - Numbers
+  - Special characters
+- Ensures at least one selected character type is used in the generated password.
+- Displays the generated password in a text box for easy copying.
 
-To create a password generator in which the user has to provide a range of characters between 8 and 128.
+## Usage
+1. Click the **Generate Password** button.
+2. Enter the desired password length (between 8 and 128 characters).
+3. Confirm whether to include lowercase, uppercase, numbers, and/or special characters.
+4. The password is generated and displayed in the text area.
 
-The user will have to choose at least one of the given criterias: lower case, upper case, numbers & characters.
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
 
-If user decides to not follow any of the given prompts the wite will instruct the user to meet the criterias.
+## Installation
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/your-repo/password-generator.git
+   ```
+2. Open the `index.html` file in a browser.
+
+## License
+This project is licensed under the MIT License.
+
+## Acknowledgements
+This project was built as part of a coding challenge. Special thanks to the provided starter code and guidance from instructors and fellow students.
+
+
 
